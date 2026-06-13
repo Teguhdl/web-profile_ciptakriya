@@ -1,0 +1,73 @@
+<!-- @dsCard group="Web Profile" viewport="1280x900" name="CKE Web Profile — Homepage" subtitle="Full interactive company-profile site" -->
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PT. Cipta Kriya Engineering — We Solve Your Problem</title>
+<link rel="stylesheet" href="../../styles.css">
+<link rel="stylesheet" href="kit.css">
+</head>
+<body>
+<template id="__bundler_thumbnail">
+  <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+    <rect width="400" height="300" fill="#122b3f"/>
+    <circle cx="200" cy="128" r="46" fill="none" stroke="#2299c4" stroke-width="13"/>
+    <circle cx="200" cy="128" r="16" fill="#2299c4"/>
+    <path d="M232 96 q34 -10 40 24 q-30 14 -40 -24 Z" fill="#b6d335"/>
+    <text x="200" y="214" fill="#ffffff" font-family="Archivo, sans-serif" font-weight="800" font-size="30" text-anchor="middle">CKE</text>
+    <text x="200" y="240" fill="#6dc6e2" font-family="monospace" font-size="12" letter-spacing="2" text-anchor="middle">WE SOLVE YOUR PROBLEM</text>
+  </svg>
+</template>
+<div id="root"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<script src="../../_ds_bundle.js"></script>
+
+<script type="text/babel" src="Header.jsx"></script>
+<script type="text/babel" src="Hero.jsx"></script>
+<script type="text/babel" src="About.jsx"></script>
+<script type="text/babel" src="Services.jsx"></script>
+<script type="text/babel" src="Projects.jsx"></script>
+<script type="text/babel" src="Experience.jsx"></script>
+<script type="text/babel" src="Partners.jsx"></script>
+<script type="text/babel" src="Contact.jsx"></script>
+
+<script type="text/babel" data-presets="react">
+  function App() {
+    const onNav = (id) => {
+      const el = document.getElementById(id);
+      if (el) {
+        const y = el.getBoundingClientRect().top + window.scrollY - 70;
+        window.scrollTo({ top: id === 'beranda' ? 0 : y, behavior: 'smooth' });
+      }
+    };
+
+    React.useEffect(() => {
+      const t = setInterval(() => { if (window.lucide) { window.lucide.createIcons(); } }, 250);
+      const stop = setTimeout(() => clearInterval(t), 2500);
+      return () => { clearInterval(t); clearTimeout(stop); };
+    });
+
+    return (
+      <div className="cke-app">
+        <window.CKEHeader onNav={onNav} />
+        <window.CKEHero onNav={onNav} />
+        <window.CKEAbout onNav={onNav} />
+        <window.CKEServices />
+        <window.CKEProjects onNav={onNav} />
+        <window.CKEExperience />
+        <window.CKEStatsStrip />
+        <window.CKEPartners />
+        <window.CKEContact />
+        <window.CKEFooter onNav={onNav} />
+      </div>
+    );
+  }
+  ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>

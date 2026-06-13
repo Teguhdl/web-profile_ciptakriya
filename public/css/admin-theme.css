@@ -1,0 +1,179 @@
+/* ============================================================
+   CIPTA KRIYA ENGINEERING — ADMIN THEME OVERRIDE
+   Remaps the legacy red admin palette to the brand identity
+   used on the public website (Engineering Blue + Leaf Green).
+   Must be loaded AFTER css/final.css.
+   ============================================================ */
+
+/* ---- Brand variables (mirror of website tokens) ---- */
+:root {
+    --cke-blue-50:  #ecf8fc;
+    --cke-blue-100: #cfedf7;
+    --cke-blue-200: #a3dcee;
+    --cke-blue-300: #6dc6e2;
+    --cke-blue-500: #2299c4;
+    --cke-blue-600: #167ea7;
+    --cke-blue-700: #156888;
+    --cke-blue-800: #17556f;
+    --cke-blue-900: #16475d;
+
+    --cke-green-500: #74a22b;
+    --cke-green-600: #5a8121;
+
+    --cke-navy-700: #122b3f;
+    --cke-navy-800: #0d2030;
+
+    --cke-steel-25:  #fbfcfd;
+    --cke-steel-50:  #f5f7f9;
+    --cke-steel-100: #eceff2;
+    --cke-steel-200: #dde2e7;
+    --cke-steel-300: #c4ccd4;
+    --cke-steel-500: #6f7c8a;
+    --cke-steel-700: #3c454f;
+}
+
+/* ============================================================
+   1) TYPOGRAPHY — align with public website
+   ============================================================ */
+body {
+    font-family: 'IBM Plex Sans', 'Segoe UI', system-ui, sans-serif !important;
+    background-color: var(--cke-steel-50) !important;
+    color: var(--cke-steel-700);
+    -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5,
+.font-bold, .font-extrabold {
+    font-family: 'Archivo', 'Segoe UI', system-ui, sans-serif;
+    color: var(--cke-navy-700);
+    letter-spacing: -0.015em;
+}
+
+/* ============================================================
+   2) COLOR REMAP — Tailwind red.* utilities → CKE blue.*
+   (covers all classes currently used across admin views)
+   ============================================================ */
+
+/* Backgrounds */
+.bg-red-50   { background-color: var(--cke-blue-50)  !important; }
+.bg-red-100  { background-color: var(--cke-blue-100) !important; }
+.bg-red-200  { background-color: var(--cke-blue-200) !important; }
+.bg-red-500  { background-color: var(--cke-blue-500) !important; }
+.bg-red-600  { background-color: var(--cke-blue-500) !important; }
+.bg-red-700  { background-color: var(--cke-blue-600) !important; }
+.bg-red-800  { background-color: var(--cke-blue-700) !important; }
+
+/* Text */
+.text-red-400 { color: var(--cke-blue-400, #3fb1d6) !important; }
+.text-red-500 { color: var(--cke-blue-500) !important; }
+.text-red-600 { color: var(--cke-blue-600) !important; }
+.text-red-700 { color: var(--cke-blue-700) !important; }
+.text-red-800 { color: var(--cke-blue-800) !important; }
+
+/* Borders */
+.border-red-100 { border-color: var(--cke-blue-100) !important; }
+.border-red-200 { border-color: var(--cke-blue-200) !important; }
+.border-red-500 { border-color: var(--cke-blue-500) !important; }
+.border-red-600 { border-color: var(--cke-blue-600) !important; }
+
+/* Hover states */
+.hover\:bg-red-50:hover   { background-color: var(--cke-blue-50)  !important; }
+.hover\:bg-red-100:hover  { background-color: var(--cke-blue-100) !important; }
+.hover\:bg-red-600:hover  { background-color: var(--cke-blue-500) !important; }
+.hover\:bg-red-700:hover  { background-color: var(--cke-blue-600) !important; }
+.hover\:bg-red-800:hover  { background-color: var(--cke-blue-700) !important; }
+.hover\:text-red-500:hover { color: var(--cke-blue-500) !important; }
+.hover\:text-red-600:hover { color: var(--cke-blue-600) !important; }
+.hover\:text-red-700:hover { color: var(--cke-blue-700) !important; }
+
+/* Group hover */
+.group:hover .group-hover\:text-red-500 { color: var(--cke-blue-500) !important; }
+.group:hover .group-hover\:text-red-600 { color: var(--cke-blue-600) !important; }
+.group-focus-within\:text-red-500       { color: var(--cke-blue-500) !important; }
+
+.group:focus-within .group-focus-within\:text-red-500 {
+    color: var(--cke-blue-500) !important;
+}
+
+/* Focus rings & borders */
+.focus\:ring-red-100:focus {
+    --tw-ring-color: var(--cke-blue-100) !important;
+    box-shadow: 0 0 0 4px var(--cke-blue-100) !important;
+}
+.focus\:ring-red-200:focus {
+    --tw-ring-color: var(--cke-blue-200) !important;
+    box-shadow: 0 0 0 4px var(--cke-blue-200) !important;
+}
+.focus\:border-red-500:focus { border-color: var(--cke-blue-500) !important; }
+.focus\:ring-red-500:focus   { --tw-ring-color: var(--cke-blue-500) !important; }
+
+/* Gradient buttons (Tailwind builds these as concrete declarations) */
+.bg-gradient-to-r.from-red-600.to-red-700,
+.bg-gradient-to-r.from-red-600 {
+    background-image: linear-gradient(to right, var(--cke-blue-500), var(--cke-blue-600)) !important;
+}
+.bg-gradient-to-r.from-red-700.to-red-800 {
+    background-image: linear-gradient(to right, var(--cke-blue-600), var(--cke-blue-700)) !important;
+}
+.bg-gradient-to-r.hover\:from-red-700:hover,
+.bg-gradient-to-r.hover\:to-red-800:hover,
+.bg-gradient-to-r.from-red-600.to-red-700.hover\:from-red-700:hover,
+.bg-gradient-to-r.from-red-600.to-red-700.hover\:to-red-800:hover {
+    background-image: linear-gradient(to right, var(--cke-blue-600), var(--cke-blue-700)) !important;
+}
+
+/* Soft brand-tinted shadows replace red shadows */
+.shadow-red-100,
+.shadow-red-200 {
+    box-shadow:
+        0 10px 15px -3px rgba(34, 153, 196, 0.30),
+        0 4px 6px -4px rgba(34, 153, 196, 0.18) !important;
+}
+.shadow-red-300,
+.hover\:shadow-red-300:hover {
+    box-shadow:
+        0 14px 28px -6px rgba(34, 153, 196, 0.40),
+        0 6px 12px -6px rgba(34, 153, 196, 0.24) !important;
+}
+
+/* ============================================================
+   3) GENERIC POLISH
+   ============================================================ */
+
+/* Selection */
+::selection {
+    background: var(--cke-blue-200);
+    color: var(--cke-navy-800);
+}
+
+/* Material Symbols sizing parity with website */
+.material-symbols-outlined {
+    font-variation-settings:
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 24;
+}
+
+/* Subtle card vibe for content panes that use `.bg-white` */
+main.bg-white,
+aside.bg-white {
+    background-color: var(--cke-steel-25) !important;
+}
+
+/* Sidebar separator a touch deeper */
+aside .border-gray-100,
+aside .border-gray-50,
+header.bg-white.border-b {
+    border-color: var(--cke-steel-100) !important;
+}
+
+/* Avatar circle inherits brand gradient */
+.bg-red-600.text-white.rounded-full {
+    background: linear-gradient(135deg, var(--cke-blue-500), var(--cke-blue-700)) !important;
+}
+
+/* Notification dot */
+.bg-red-500.rounded-full {
+    background-color: var(--cke-green-500) !important;
+}

@@ -1,0 +1,21 @@
+<!-- @dsCard group="Brand" viewport="700x200" name="Logo on Dark" subtitle="Place on a white chip over navy surfaces" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../../styles.css">
+<style>
+  body { margin: 0; padding: 24px; background: var(--cke-navy-700); display: flex; gap: 28px; align-items: center; }
+  .wrap { flex: 1; display: flex; flex-direction: column; align-items: center; }
+  .panel { width: 100%; height: 150px; display: flex; align-items: center; justify-content: center; border-radius: var(--radius-lg); }
+  .chip { background: #fff; }
+  .chip img { height: 92px; }
+  .raw img { height: 92px; }
+  .cap { font-family: var(--font-mono); font-size: 10px; color: var(--cke-blue-200); margin-top: 8px; }
+</style>
+</head>
+<body>
+  <div class="wrap"><div class="panel chip"><img src="../../assets/logo/cke-logomark.png" alt="CKE logo"></div><div class="cap">✓ white chip — preferred</div></div>
+  <div class="wrap"><div class="panel raw" style="border:1px dashed var(--cke-navy-400)"><img src="../../assets/logo/cke-logomark-transparent.png" alt="CKE logo" style="opacity:0.5"></div><div class="cap">✗ avoid — navy text disappears</div></div>
+</body>
+</html>

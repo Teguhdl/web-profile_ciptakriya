@@ -1,0 +1,39 @@
+<!-- @dsCard group="Colors" viewport="700x170" name="Navy Ink & Lime Accent" subtitle="Heading ink + the bright leaf highlight" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../../styles.css">
+<style>
+  body { margin: 0; padding: 20px; background: var(--surface-card); font-family: var(--font-mono); }
+  .grp { margin-bottom: 12px; }
+  .lbl { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 6px; }
+  .row { display: flex; gap: 0; border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow-sm); }
+  .sw { flex: 1; height: 56px; display: flex; flex-direction: column; justify-content: flex-end; padding: 7px; box-sizing: border-box; }
+  .sw span { font-size: 10px; line-height: 1.3; color: #fff; }
+  .n { font-weight: 600; }
+  .h { opacity: 0.75; }
+  .lime span { color: var(--cke-navy-800); }
+</style>
+</head>
+<body>
+  <div class="grp">
+    <div class="lbl">Navy Ink</div>
+    <div class="row">
+      <div class="sw" style="background:var(--cke-navy-400)"><span class="n">400</span><span class="h">#3f5e7c</span></div>
+      <div class="sw" style="background:var(--cke-navy-500)"><span class="n">500</span><span class="h">#234763</span></div>
+      <div class="sw" style="background:var(--cke-navy-600)"><span class="n">600</span><span class="h">#18374f</span></div>
+      <div class="sw" style="background:var(--cke-navy-700)"><span class="n">700 ● heading</span><span class="h">#122b3f</span></div>
+      <div class="sw" style="background:var(--cke-navy-800)"><span class="n">800</span><span class="h">#0d2030</span></div>
+      <div class="sw" style="background:var(--cke-navy-900)"><span class="n">900</span><span class="h">#081621</span></div>
+    </div>
+  </div>
+  <div class="grp">
+    <div class="lbl">Lime Accent — sparingly, for highlights &amp; energy</div>
+    <div class="row">
+      <div class="sw lime" style="background:var(--cke-lime); flex:0 0 200px"><span class="n">--cke-lime</span><span class="h">#b6d335</span></div>
+      <div class="sw" style="background:var(--cke-steel-50)"><span style="color:var(--cke-navy-700)" class="n">paired on light</span></div>
+    </div>
+  </div>
+</body>
+</html>

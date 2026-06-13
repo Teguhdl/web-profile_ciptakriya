@@ -1,0 +1,25 @@
+<!-- @dsCard group="Colors" viewport="700x130" name="Semantic States" subtitle="Success, warning, danger, info" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../../styles.css">
+<style>
+  body { margin: 0; padding: 20px; background: var(--surface-card); font-family: var(--font-mono); }
+  .row { display: flex; gap: 12px; }
+  .cell { flex: 1; border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow-xs); border: 1px solid var(--border-subtle); }
+  .bar { height: 44px; }
+  .meta { padding: 8px 10px; }
+  .meta .n { font-size: 11px; font-weight: 600; color: var(--cke-navy-700); }
+  .meta .h { font-size: 10px; color: var(--text-muted); }
+</style>
+</head>
+<body>
+  <div class="row">
+    <div class="cell"><div class="bar" style="background:var(--cke-success)"></div><div class="meta"><div class="n">Success</div><div class="h">#2e9c4f</div></div></div>
+    <div class="cell"><div class="bar" style="background:var(--cke-warning)"></div><div class="meta"><div class="n">Warning</div><div class="h">#d8932a</div></div></div>
+    <div class="cell"><div class="bar" style="background:var(--cke-danger)"></div><div class="meta"><div class="n">Danger</div><div class="h">#cf3b3b</div></div></div>
+    <div class="cell"><div class="bar" style="background:var(--cke-info)"></div><div class="meta"><div class="n">Info</div><div class="h">#2299c4</div></div></div>
+  </div>
+</body>
+</html>

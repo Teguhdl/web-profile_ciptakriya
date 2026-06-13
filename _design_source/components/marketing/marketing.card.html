@@ -1,0 +1,50 @@
+<!-- @dsCard group="Components" viewport="700x560" name="Marketing — Headers, Services, Stats" subtitle="SectionHeader · ServiceCard · Stat" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../../styles.css">
+<style>
+  body { margin: 0; padding: 26px; background: var(--surface-page); }
+  .stack { display: flex; flex-direction: column; gap: 24px; }
+  .services { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+  .stats { display: flex; gap: 36px; background: var(--cke-navy-700); border-radius: var(--radius-lg); padding: 26px 30px; }
+  .lucide { width: 26px; height: 26px; }
+</style>
+</head>
+<body>
+  <div id="root"></div>
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="../../_ds_bundle.js"></script>
+  <script type="text/babel">
+    const { SectionHeader, ServiceCard, Stat } = window.CiptaKriyaEngineeringDesignSystem_d6b0c6;
+    const Icon = (n) => <i data-lucide={n} className="lucide"></i>;
+    function Demo() {
+      return (
+        <div className="stack">
+          <SectionHeader
+            eyebrow="// Bidang Usaha"
+            title={<>What We <em>Engineer</em></>}
+            subtitle="Mechanical & electrical construction, fabrication and installation for heavy industry."
+          />
+          <div className="services">
+            <ServiceCard index="01" icon={Icon('cog')} title="Konstruksi Mekanikal" description="Fabrication & erection of heavy mechanical structures." />
+            <ServiceCard index="02" icon={Icon('zap')} title="Konstruksi Elektrikal" description="Panel, wiring & power installation for plants." />
+            <ServiceCard index="03" icon={Icon('warehouse')} title="Pergudangan" description="Warehouse build-out, racking & storage systems." />
+          </div>
+          <div className="stats">
+            <Stat value="100" suffix="+" label="Proyek Selesai" onDark />
+            <Stat value="15" suffix="+" label="Sektor Industri" onDark />
+            <Stat value="2021" label="Berdiri Sejak" onDark />
+          </div>
+        </div>
+      );
+    }
+    ReactDOM.createRoot(document.getElementById('root')).render(<Demo />);
+    setTimeout(() => window.lucide && window.lucide.createIcons(), 80);
+  </script>
+</body>
+</html>

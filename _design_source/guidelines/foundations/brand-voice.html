@@ -1,0 +1,25 @@
+<!-- @dsCard group="Brand" viewport="700x180" name="Tagline & Imagery" subtitle="Voice mark + on-brand photography mood" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../../styles.css">
+<style>
+  body { margin: 0; padding: 0; background: var(--surface-card); display: flex; }
+  .voice { flex: 1; padding: 26px 28px; display: flex; flex-direction: column; justify-content: center; }
+  .name { font-family: var(--font-display); font-weight: 800; font-size: 22px; color: var(--cke-navy-700); letter-spacing: -0.02em; line-height: 1.1; }
+  .tag { font-family: var(--font-display); font-weight: 700; font-size: 17px; color: var(--cke-green-500); margin-top: 4px; }
+  .desc { font-family: var(--font-mono); font-size: 10px; color: var(--text-muted); margin-top: 14px; letter-spacing: 0.04em; line-height: 1.6; }
+  .photo { width: 290px; background-size: cover; background-position: center; position: relative; }
+  .photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(120deg, var(--cke-navy-700) 0%, transparent 55%); }
+</style>
+</head>
+<body>
+  <div class="voice">
+    <div class="name">PT. Cipta Kriya Engineering</div>
+    <div class="tag">We Solve Your Problem</div>
+    <div class="desc">Photography: real site work — heavy steel,<br>silos &amp; batching plants. Cool industrial cast,<br>navy gradient wash for text legibility.</div>
+  </div>
+  <div class="photo" style="background-image:url('../../assets/photos/silo-fabrication.png')"></div>
+</body>
+</html>
