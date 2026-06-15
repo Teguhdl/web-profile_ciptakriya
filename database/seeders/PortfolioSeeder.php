@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Schema;
 use App\Models\Portfolio;
 
 class PortfolioSeeder extends Seeder
@@ -12,7 +13,9 @@ class PortfolioSeeder extends Seeder
      */
     public function run(): void
     {
+        Schema::disableForeignKeyConstraints();
         Portfolio::truncate();
+        Schema::enableForeignKeyConstraints();
 
         $data = [
             [
