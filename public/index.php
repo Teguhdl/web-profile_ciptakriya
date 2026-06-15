@@ -1,5 +1,12 @@
 <?php
 
+// Bersihkan output buffer dari warning startup PHP (seperti warning temp upload directory)
+if (ob_get_level() > 0) {
+    ob_clean();
+}
+ini_set('display_errors', '0');
+error_reporting(E_ALL & ~E_NOTICE & ~E_WARNING & ~E_DEPRECATED);
+
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Http\Request;
 

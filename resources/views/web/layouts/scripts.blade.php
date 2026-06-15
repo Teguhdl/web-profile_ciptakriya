@@ -11,7 +11,8 @@
 
   // Header Scroll Logic
   function updateHeaderScroll() {
-    if (window.scrollY > 40) {
+    // Jika tidak ada heroSection (di subpage), header harus selalu solid
+    if (!heroSection || window.scrollY > 40) {
       header.classList.add('cke-hd--solid');
     } else {
       if (!isMobileMenuOpen) {

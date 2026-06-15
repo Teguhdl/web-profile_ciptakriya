@@ -37,12 +37,16 @@ class PortfolioController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'gallery_images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
             'client' => 'nullable|string|max:255',
             'year' => 'nullable|integer',
             'status' => 'required|in:Publish,Draft',
             'description' => 'required',
+            'tag' => 'nullable|string|max:255',
+            'tone' => 'nullable|string|in:brand,green',
         ]);
 
+        $imagePath = null;
         if ($request->hasFile('image')) {
             $imagePath = $this->uploadImage($request->file('image'), 'portfolios');
         }
@@ -54,7 +58,23 @@ class PortfolioController extends Controller
             'year' => $request->year,
             'status' => $request->status,
             'description' => $request->description,
+            'tag' => $request->tag,
+            'tone' => $request->tone,
         ]);
+
+        if ($request->hasFile('gallery_images')) {
+            foreach ($request->file('gallery_images') as $file) {
+                 if ($file && $file->isValid()) {
+                     $path = $this->uploadImage($file, 'portfolios/gallery');
+                     if (!empty($path)) {
+                         \App\Models\PortfolioImage::create([
+                             'portfolio_id' => $portfolio->id,
+                             'image_path' => $path
+                         ]);
+                     }
+                 }
+            }
+        }
 
         ActivityLog::create([
             'admin_id' => Auth::guard('admin')->id(),
@@ -77,10 +97,13 @@ class PortfolioController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'gallery_images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
             'client' => 'nullable|string|max:255',
             'year' => 'nullable|integer',
             'status' => 'required|in:Publish,Draft',
             'description' => 'required',
+            'tag' => 'nullable|string|max:255',
+            'tone' => 'nullable|string|in:brand,green',
         ]);
 
         if ($request->hasFile('image')) {
@@ -94,11 +117,42 @@ class PortfolioController extends Controller
             $portfolio->image = $this->uploadImage($request->file('image'), 'portfolios');
         }
 
+        // Handle new gallery images
+        if ($request->hasFile('gallery_images')) {
+            foreach ($request->file('gallery_images') as $file) {
+                 if ($file && $file->isValid()) {
+                     $path = $this->uploadImage($file, 'portfolios/gallery');
+                     if (!empty($path)) {
+                         \App\Models\PortfolioImage::create([
+                             'portfolio_id' => $portfolio->id,
+                             'image_path' => $path
+                         ]);
+                     }
+                 }
+            }
+        }
+        
+        // Handle deleted gallery images
+        if ($request->has('delete_images')) {
+            foreach ($request->delete_images as $imageId) {
+                $image = \App\Models\PortfolioImage::find($imageId);
+                if ($image && $image->portfolio_id == $portfolio->id) {
+                    $oldPath = str_replace('storage/', '', $image->image_path);
+                    if (Storage::exists($oldPath)) {
+                        Storage::delete($oldPath);
+                    }
+                    $image->delete();
+                }
+            }
+        }
+
         $portfolio->title = $request->title;
         $portfolio->client = $request->client;
         $portfolio->year = $request->year;
         $portfolio->status = $request->status;
         $portfolio->description = $request->description;
+        $portfolio->tag = $request->tag;
+        $portfolio->tone = $request->tone;
         $portfolio->save();
 
         ActivityLog::create([

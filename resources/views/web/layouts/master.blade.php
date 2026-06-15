@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id" prefix="og: https://ogp.me/ns#">
 
 <head>
     @include('web.layouts.head')

@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Admin Dashboard') - PT. Cipta Kriya Engineering</title>
+    <!-- Favicon / Logo Browser -->
+    <link rel="icon" type="image/png" href="{{ asset(\App\Models\Setting::where('key', 'system_logo')->value('value') ?? 'assets/web/logo/cke-logomark.png') }}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset(\App\Models\Setting::where('key', 'system_logo')->value('value') ?? 'assets/web/logo/cke-logomark.png') }}">
     <!-- <script src="https://cdn.tailwindcss.com"></script> -->
     <!-- <script src="https://cdn.tailwindcss.com"></script> -->
     <link rel="stylesheet" href="{{ asset('css/final.css') }}">
@@ -70,13 +73,7 @@
 
                 <div class="pt-4 pb-2 px-4 text-xs font-semibold text-gray-400 uppercase tracking-wider">Content</div>
 
-                <!-- Produk -->
-                @if(Auth::guard('admin')->user()->hasPermission('product.view'))
-                <a href="{{ route('admin.products.index') }}" class="flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl transition-colors {{ request()->routeIs('admin.products.*') ? 'bg-red-50 text-red-600' : 'text-gray-500 hover:bg-gray-50 hover:text-red-600' }}">
-                    <span class="material-symbols-outlined">inventory_2</span>
-                    Produk
-                </a>
-                @endif
+
 
                 <!-- Mitra -->
                 @if(Auth::guard('admin')->user()->hasPermission('mitra.view'))
@@ -94,11 +91,31 @@
                 </a>
                 @endif
 
+                <!-- Rekam Jejak -->
+                @if(Auth::guard('admin')->user()->hasPermission('portfolio.view') || Auth::guard('admin')->user()->role->name === 'Super Admin')
+                <a href="{{ route('admin.experiences.index') }}" class="flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl transition-colors {{ request()->routeIs('admin.experiences.*') ? 'bg-red-50 text-red-600' : 'text-gray-500 hover:bg-gray-50 hover:text-red-600' }}">
+                    <span class="material-symbols-outlined">history</span>
+                    Rekam Jejak
+                </a>
+                @endif
+
                 <!-- Page Settings -->
                  @if(Auth::guard('admin')->user()->hasPermission('setting.view'))
                 <a href="{{ route('admin.page_settings.index') }}" class="flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl transition-colors {{ request()->routeIs('admin.page_settings.*') ? 'bg-red-50 text-red-600' : 'text-gray-500 hover:bg-gray-50 hover:text-red-600' }}">
                     <span class="material-symbols-outlined">article</span>
                     Kelola Halaman
+                </a>
+
+                <!-- Custom Pages CMS -->
+                <a href="{{ route('admin.pages.index') }}" class="flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl transition-colors {{ request()->routeIs('admin.pages.*') ? 'bg-red-50 text-red-600' : 'text-gray-500 hover:bg-gray-50 hover:text-red-600' }}">
+                    <span class="material-symbols-outlined">edit_note</span>
+                    Halaman Kustom
+                </a>
+
+                <!-- Media Library -->
+                <a href="{{ route('admin.media.index') }}" class="flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl transition-colors {{ request()->routeIs('admin.media.*') ? 'bg-red-50 text-red-600' : 'text-gray-500 hover:bg-gray-50 hover:text-red-600' }}">
+                    <span class="material-symbols-outlined">perm_media</span>
+                    Media Library
                 </a>
                 @endif
 

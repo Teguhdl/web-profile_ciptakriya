@@ -6,9 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Models\Setting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use App\Traits\UploadsWebP;
 
 class SettingController extends Controller
 {
+    use UploadsWebP;
     public function index()
     {
         $settings = Setting::all()->pluck('value', 'key');
@@ -23,13 +25,22 @@ class SettingController extends Controller
         foreach ($data as $key => $value) {
             if ($request->hasFile($key)) {
                 $file = $request->file($key);
-                $filename = time() . '_' . $file->getClientOriginalName();
-                $path = $file->storeAs('settings', $filename, 'public');
+                
+                // Cek apakah ini gambar untuk dikonversi ke WebP
+                if (in_array(strtolower($file->getClientOriginalExtension()), ['jpeg', 'jpg', 'png', 'webp'])) {
+                    $filename = time() . '_' . pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME) . '.webp';
+                    $this->uploadAndOptimizeToWebp($file, 'settings/' . $filename);
+                    $filename = time() . '_' . $file->getClientOriginalName();
+                    Storage::disk('public')->put('settings/' . $filename, file_get_contents($file->getPathname()));
+                }
                 
                 // Get old value to delete if needed
                 $oldSetting = Setting::where('key', $key)->first();
                 if ($oldSetting && $oldSetting->type == 'image' && $oldSetting->value) {
-                    Storage::delete(str_replace('storage/', '', $oldSetting->value));
+                    $cleanPath = trim(str_replace('storage/', '', $oldSetting->value));
+                    if ($cleanPath !== '') {
+                        Storage::disk('public')->delete($cleanPath);
+                    }
                 }
 
                 $value = 'storage/settings/' . $filename;

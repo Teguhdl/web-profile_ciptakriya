@@ -177,3 +177,9 @@ header.bg-white.border-b {
 .bg-red-500.rounded-full {
     background-color: var(--cke-green-500) !important;
 }
+
+/* Ensure text-white utility overrides font-bold color override */
+.text-white {
+    color: #ffffff !important;
+}
+

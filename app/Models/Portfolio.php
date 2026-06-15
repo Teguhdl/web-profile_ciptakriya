@@ -15,6 +15,23 @@ class Portfolio extends Model
         'client',
         'year',
         'status',
-        'description'
+        'description',
+        'tag',
+        'tone'
     ];
+
+    public function images()
+    {
+        return $this->hasMany(PortfolioImage::class);
+    }
+
+    /**
+     * Get the route key for the model.
+     *
+     * @return mixed
+     */
+    public function getRouteKey()
+    {
+        return $this->id . '-' . \Illuminate\Support\Str::slug($this->title);
+    }
 }

@@ -18,6 +18,8 @@ class DatabaseSeeder extends Seeder
             PagesSeeder::class,
             ProductSeeder::class,
             PortfolioSeeder::class,
+            ExperienceSeeder::class,
+            MitraSeeder::class,
         ]);
     }
 }

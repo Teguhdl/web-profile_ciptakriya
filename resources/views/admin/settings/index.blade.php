@@ -83,23 +83,45 @@
 
             <h3 class="text-lg font-bold text-gray-900 mb-4">Branding & Social</h3>
             
-            <div class="flex items-start gap-6 mb-8">
-                <div class="shrink-0">
-                    <label class="block text-sm font-semibold text-gray-700 mb-2">Company Logo</label>
-                    @if(isset($settings['system_logo']))
-                        <div class="h-32 w-32 bg-gray-50 border-2 border-dashed border-gray-200 rounded-xl flex items-center justify-center p-2 overflow-hidden relative group">
-                            <img class="h-full w-full object-contain" src="{{ asset($settings['system_logo']) }}" alt="Logo">
-                        </div>
-                    @else
-                        <div class="h-32 w-32 bg-gray-50 border-2 border-dashed border-gray-200 rounded-xl flex items-center justify-center text-gray-400">
-                             <span class="material-symbols-outlined" style="font-size: 32px">image</span>
-                        </div>
-                    @endif
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <div class="flex items-start gap-4">
+                    <div class="shrink-0">
+                        <label class="block text-xs font-semibold text-gray-500 mb-2 uppercase tracking-wider">Company Logo</label>
+                        @if(isset($settings['system_logo']))
+                            <div class="h-24 w-24 bg-gray-50 border border-gray-200 rounded-xl flex items-center justify-center p-2 overflow-hidden">
+                                <img class="h-full w-full object-contain" src="{{ asset($settings['system_logo']) }}" alt="Logo">
+                            </div>
+                        @else
+                            <div class="h-24 w-24 bg-gray-50 border-2 border-dashed border-gray-200 rounded-xl flex items-center justify-center text-gray-400">
+                                 <span class="material-symbols-outlined" style="font-size: 24px">image</span>
+                            </div>
+                        @endif
+                    </div>
+                    <div class="flex-1">
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Upload Logo</label>
+                        <input type="file" name="system_logo" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-red-50 file:text-red-700 hover:file:bg-red-100 cursor-pointer"/>
+                        <p class="mt-1 text-xs text-gray-400">PNG, JPG. Max: 2MB.</p>
+                    </div>
                 </div>
-                <div class="flex-1">
-                    <label class="block text-sm font-semibold text-gray-700 mb-2">Upload New Logo</label>
-                    <input type="file" name="system_logo" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2.5 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-red-50 file:text-red-700 hover:file:bg-red-100 cursor-pointer"/>
-                    <p class="mt-2 text-xs text-gray-400">Supported formats: PNG, JPG, GIF. Max size: 2MB.</p>
+
+                <div class="flex items-start gap-4">
+                    <div class="shrink-0">
+                        <label class="block text-xs font-semibold text-gray-500 mb-2 uppercase tracking-wider">Favicon</label>
+                        @if(isset($settings['system_favicon']))
+                            <div class="h-24 w-24 bg-gray-50 border border-gray-200 rounded-xl flex items-center justify-center p-2 overflow-hidden">
+                                <img class="h-full w-full object-contain" src="{{ asset($settings['system_favicon']) }}" alt="Favicon">
+                            </div>
+                        @else
+                            <div class="h-24 w-24 bg-gray-50 border-2 border-dashed border-gray-200 rounded-xl flex items-center justify-center text-gray-400">
+                                 <span class="material-symbols-outlined" style="font-size: 24px">bookmark</span>
+                            </div>
+                        @endif
+                    </div>
+                    <div class="flex-1">
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Upload Favicon</label>
+                        <input type="file" name="system_favicon" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-red-50 file:text-red-700 hover:file:bg-red-100 cursor-pointer"/>
+                        <p class="mt-1 text-xs text-gray-400">ICO, PNG. Max: 1MB.</p>
+                    </div>
                 </div>
             </div>
 
@@ -116,6 +138,32 @@
                      <label class="block text-sm font-semibold text-gray-700 mb-2">Twitter / X</label>
                      <input type="url" name="social_twitter" value="{{ $settings['social_twitter'] ?? '' }}" class="w-full bg-gray-50 border-gray-100 rounded-lg px-4 py-3 text-gray-700 focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors" placeholder="https://twitter.com/...">
                 </div>
+            </div>
+
+            <hr class="border-gray-100 my-8">
+
+            <h3 class="text-lg font-bold text-gray-900 mb-1">Integrations & SEO</h3>
+            <p class="text-gray-500 text-sm mb-6">Manage tracking codes, embeds, and search engine optimization</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Google Analytics GA4 Tag ID</label>
+                    <input type="text" name="google_analytics_id" value="{{ $settings['google_analytics_id'] ?? '' }}" class="w-full bg-gray-50 border-gray-100 rounded-lg px-4 py-3 text-gray-700 focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors" placeholder="e.g. G-XXXXXXXXXX">
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">SEO Keywords</label>
+                    <input type="text" name="seo_keywords" value="{{ $settings['seo_keywords'] ?? '' }}" class="w-full bg-gray-50 border-gray-100 rounded-lg px-4 py-3 text-gray-700 focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors" placeholder="keyword1, keyword2, keyword3...">
+                </div>
+            </div>
+
+            <div class="mb-6">
+                <label class="block text-sm font-semibold text-gray-700 mb-2">Google Maps Embed URL (iframe src)</label>
+                <textarea name="google_maps_url" rows="3" class="w-full bg-gray-50 border-gray-100 rounded-lg px-4 py-3 text-gray-700 focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors" placeholder="e.g. https://www.google.com/maps/embed?...">{{ $settings['google_maps_url'] ?? '' }}</textarea>
+            </div>
+
+            <div class="mb-6">
+                <label class="block text-sm font-semibold text-gray-700 mb-2">SEO Meta Description</label>
+                <textarea name="seo_description" rows="3" class="w-full bg-gray-50 border-gray-100 rounded-lg px-4 py-3 text-gray-700 focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors" placeholder="Enter meta description for search engines...">{{ $settings['seo_description'] ?? '' }}</textarea>
             </div>
 
             <div class="flex pt-4">

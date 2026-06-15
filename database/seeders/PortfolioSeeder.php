@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Portfolio;
 
 class PortfolioSeeder extends Seeder
 {
@@ -12,86 +12,63 @@ class PortfolioSeeder extends Seeder
      */
     public function run(): void
     {
-        \App\Models\Portfolio::truncate();
+        Portfolio::truncate();
 
         $data = [
             [
-                'title' => 'Pengadaan Rubber Fender Dermaga A',
-                'image' => 'assets/web/products/w-fender.jpg', // Placeholder image
-                'client' => 'PT. Pelabuhan Indonesia (PELINDO)',
-                'year' => 2023,
-                'status' => 'Completed',
-                'description' => 'Supply dan instalasi rubber fender tipe V untuk dermaga kargo.',
+                'title' => 'Pembangunan Batching Plant Cimareme',
+                'image' => 'assets/web/photos/batching-plant.png',
+                'client' => 'PT SCG Readymix Indonesia',
+                'year' => 2025,
+                'status' => 'Publish',
+                'tag' => 'Batching Plant',
+                'tone' => 'brand',
+                'description' => 'Pekerjaan konstruksi terpadu untuk pembangunan Batching Plant baru, mulai dari sipil (pondasi), instalasi mekanikal silo, conveyor system, mixer, hingga instalasi panel elektrikal daya dan control system.',
             ],
             [
-                'title' => 'Supply Expansion Joint Jembatan Suramadu',
-                'image' => 'assets/web/products/expansion-joint.png', // Placeholder image
-                'client' => 'PT. Waskita Karya',
+                'title' => 'Pabrikasi & Pemasangan Silo',
+                'image' => 'assets/web/photos/silo-fabrication.png',
+                'client' => 'Storage Tank',
                 'year' => 2024,
-                'status' => 'On Progress',
-                'description' => 'Penyediaan expansion joint strip seal untuk pemeliharaan jembatan.',
+                'status' => 'Publish',
+                'tag' => 'Fabrikasi',
+                'tone' => 'green',
+                'description' => 'Fabrikasi tangki silo berkapasitas besar menggunakan plat baja pilihan dengan pengerjaan pengelasan bersertifikat, lengkap dengan instalasi di lokasi site konsumen termasuk support leg, catwalk, dan piping line.',
             ],
             [
-                'title' => 'Pembuatan Roller Conveyor Tambang',
-                'image' => 'assets/web/products/roller-pu.jpg', // Placeholder
-                'client' => 'PT. Adaro Energy',
-                'year' => 2022,
-                'status' => 'Completed',
-                'description' => 'Produksi heavy duty roller conveyor untuk sistem transportasi batubara.',
-            ],
-            [
-                'title' => 'Rubber Bearing Pad Tol Trans Jawa',
-                'client' => 'PT. Jasa Marga',
+                'title' => 'Bongkar Pasang Bearing Roller Crusher',
+                'image' => 'assets/web/photos/mechanical-work.png',
+                'client' => 'Industri Semen',
                 'year' => 2023,
-                'status' => 'Completed',
-                'description' => 'Suplai bantalan karet jembatan untuk proyek jalan tol.',
+                'status' => 'Publish',
+                'tag' => 'Mekanikal',
+                'tone' => 'brand',
+                'description' => 'Pekerjaan bongkar pasang bearing roller crusher pada unit coal mill industri semen. Menggunakan alat angkat berat hidrolik presisi untuk memastikan kelurusan poros crusher dan meminimalkan getaran operasional.',
             ],
             [
-                'title' => 'Perbaikan Fender Tugboat',
-                'client' => 'PT. Pertamina Trans Kontinental',
-                'year' => 2024,
-                'status' => 'Completed',
-                'description' => 'Rekondisi dan pemasangan baru W Fender untuk armada tugboat.',
-            ],
-            [
-                'title' => 'Project Cylinder Fender Jetty Batubara',
-                'client' => 'PLN Batu Bara',
-                'year' => 2021,
-                'status' => 'Completed',
-                'description' => 'Instalasi fender silinder pada jetty pembongkaran batubara.',
-            ],
-            [
-                'title' => 'Supply Karet Bantalan Rel Kereta',
-                'client' => 'PT. KAI',
-                'year' => 2022,
-                'status' => 'Completed',
-                'description' => 'Pengadaan rubber pad untuk bantalan beton rel kereta api.',
-            ],
-            [
-                'title' => 'Custom Seal Pintu Air Bendungan',
-                'client' => 'Kementerian PUPR',
+                'title' => 'Penggantian Grate Plate Cooler',
+                'image' => 'assets/web/photos/cooler-grate.png',
+                'client' => 'Industri Semen',
                 'year' => 2023,
-                'status' => 'Completed',
-                'description' => 'Pembuatan seal karet custom ukuran besar untuk pintu air bendungan.',
+                'status' => 'Publish',
+                'tag' => 'Maintenance',
+                'tone' => 'green',
+                'description' => 'Pekerjaan shutdown maintenance untuk penggantian grate plate tahan panas pada clinker cooler area pabrik semen guna memulihkan efisiensi pendinginan material hasil pembakaran tanur putar.',
             ],
             [
-                'title' => 'Polyurethane Roller Pabrik Kertas',
-                'client' => 'PT. Indah Kiat Pulp & Paper',
-                'year' => 2024,
-                'status' => 'On Progress',
-                'description' => 'Recoating dan supply roller PU untuk mesin kertas.',
-            ],
-            [
-                'title' => 'Dredging Hose 12 Inch',
-                'client' => 'PT. Timah Tbk',
-                'year' => 2022,
-                'status' => 'Completed',
-                'description' => 'Supply selang karet hisap lumpur untuk kapal keruk.',
+                'title' => 'Mobilisasi & Instalasi Batching Plant',
+                'image' => 'assets/web/photos/site-loader.png',
+                'client' => 'PT SCG Readymix — Sumbawa',
+                'year' => 2023,
+                'status' => 'Publish',
+                'tag' => 'Civil & Install',
+                'tone' => 'brand',
+                'description' => 'Pekerjaan overhaul relokasi (dismantle) unit batching plant exs-proyek lain, mobilisasi antar pulau, dan pembangunan pondasi baru serta re-instalasi mekanikal elektrikal hingga unit siap berproduksi kembali.',
             ]
         ];
 
         foreach ($data as $item) {
-            \App\Models\Portfolio::create($item);
+            Portfolio::create($item);
         }
     }
 }

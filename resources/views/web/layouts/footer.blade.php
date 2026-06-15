@@ -3,9 +3,12 @@
     <div class="cke-container cke-footer__grid">
         <div class="cke-footer__brand">
             <span class="cke-footer__chip">
-                <img src="{{ asset('assets/web/logo/logo.png') }}" alt="CKE" style="height:40px; width:auto; object-fit:contain;" />
+                <img src="{{ asset($settings['system_logo'] ?? 'assets/web/logo.png') }}" alt="{{ $settings['system_name'] ?? 'CKE' }}" style="height:40px; width:auto; object-fit:contain;" />
             </span>
-            <p class="cke-footer__tag">{{ $settings['system_slogan'] ?? 'We Solve Your Problem — konstruksi mekanikal & elektrikal untuk industri.' }}</p>
+            <p class="cke-footer__tag" style="font-weight: 600; margin-bottom: 0.5rem; max-width: 320px; color: #fff;">{{ $settings['system_slogan'] ?? 'We Solve Your Problem — konstruksi mekanikal & elektrikal untuk industri.' }}</p>
+            <p style="font-family: var(--font-body); font-size: 13.5px; line-height: 1.6; color: var(--cke-steel-400); margin: 8px 0 16px; max-width: 320px;">
+                {{ $settings['system_description'] ?? 'PT. Cipta Kriya Engineering berkomitmen menghadirkan solusi teknik terintegrasi mulai dari perancangan hingga pemeliharaan sistem mekanikal, elektrikal, fabrikasi, dan sipil industri.' }}
+            </p>
             
             <div style="display:flex; gap:0.5rem; margin-top:1rem;">
                 @if(isset($settings['social_facebook']))
@@ -26,7 +29,7 @@
             <ul>
                 <li><a href="{{ url('/') }}">Beranda</a></li>
                 <li><a href="{{ url('profil-perusahaan') }}">Tentang</a></li>
-                <li><a href="{{ url('layanan') }}">Layanan</a></li>
+                <li><a href="{{ url('rekam-jejak') }}">Rekam Jejak</a></li>
                 <li><a href="{{ url('portofolio') }}">Proyek</a></li>
                 <li><a href="{{ url('mitra') }}">Mitra</a></li>
             </ul>
@@ -35,10 +38,9 @@
         <div>
             <h4>Layanan</h4>
             <ul>
-                <li>Konstruksi Mekanikal</li>
-                <li>Konstruksi Elektrikal</li>
-                <li>Batching Plant</li>
-                <li>Pergudangan & Modifikasi</li>
+                @foreach(array_slice($global_services, 0, 5) as $s)
+                    <li>{{ $s['title'] ?? '' }}</li>
+                @endforeach
             </ul>
         </div>
         

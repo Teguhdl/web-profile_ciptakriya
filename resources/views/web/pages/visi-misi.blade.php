@@ -11,9 +11,9 @@
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 4rem;">
             
             {{-- VISI CARD --}}
-            <x-cke.card accent padded elevation="raised" style="text-align: center; border-top: 4px solid var(--color-primary);">
+             <x-cke.card accent padded elevation="raised" style="text-align: center; border-top: 4px solid var(--color-primary);">
                 <h2 style="font-family: var(--font-display); font-size: var(--fs-3xl); font-weight: var(--fw-black); color: var(--color-primary); margin-bottom: 1.5rem;">VISI</h2>
-                <div class="cke-about__p text-justify">
+                <div id="visi-content" class="cke-about__p text-justify">
                     @if(!empty($page_visi_content))
                         {!! $page_visi_content !!}
                     @else
@@ -25,7 +25,7 @@
             {{-- MISI CARD --}}
             <x-cke.card padded elevation="raised">
                 <h2 style="font-family: var(--font-display); font-size: var(--fs-3xl); font-weight: var(--fw-black); color: var(--text-strong); margin-bottom: 1.5rem; text-align: center;">MISI</h2>
-                <div class="cke-about__p">
+                <div id="misi-content" class="cke-about__p">
                     @if(!empty($page_misi_content))
                         {!! $page_misi_content !!}
                     @else
