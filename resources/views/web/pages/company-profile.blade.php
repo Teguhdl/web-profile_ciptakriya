@@ -30,12 +30,12 @@
                 </div>
             </div>
 
-            <div class="cke-about__media">
-                <div class="cke-about__photo cke-about__photo--back" style="background-image: url('{{ asset('assets/web/photos/site-loader.png') }}')"></div>
-                <div class="cke-about__photo cke-about__photo--front" style="background-image: url('{{ asset('assets/web/photos/silo-fabrication.png') }}')"></div>
-                <div class="cke-about__badge">
-                    <span class="cke-about__badge-num">2021</span>
-                    <span class="cke-about__badge-lbl">Tahun Berdiri</span>
+            <div id="profile-gallery" class="cke-about__media" style="{{ !$profile_show_gallery ? 'display: none;' : '' }}">
+                <div class="cke-about__photo cke-about__photo--back" style="background-image: url('{{ asset($profile_image_main ?? 'assets/web/photos/site-loader.png') }}')"></div>
+                <div class="cke-about__photo cke-about__photo--front" style="background-image: url('{{ asset($profile_image_1 ?? 'assets/web/photos/silo-fabrication.png') }}')"></div>
+                <div class="cke-about__badge" style="background-color: {{ $profile_badge_bg_color ?? '#0f172a' }};">
+                    <span class="cke-about__badge-num" style="color: {{ $profile_badge_text_color ?? '#b6d335' }};">{{ $profile_badge_number ?? '2021' }}</span>
+                    <span class="cke-about__badge-lbl">{{ $profile_badge_label ?? 'Tahun Berdiri' }}</span>
                 </div>
             </div>
         </div>
@@ -44,7 +44,7 @@
         <div style="margin-top: 5rem; display: flex; flex-wrap: wrap; gap: 3rem; align-items: center;">
             {{-- Kiri: Logo ISO & SNI --}}
             <div style="flex: 1; min-width: 250px; display: flex; justify-content: center; align-items: center;">
-                <img src="{{ asset('assets/web/iso-sni-logo.png') }}" loading="lazy" alt="ISO and SNI Logos" style="width: 100%; max-width: 200px;">
+                <img id="profile-cert-logo" src="{{ asset($profile_cert_image ?? 'assets/web/iso-sni-logo.png') }}" loading="lazy" alt="ISO and SNI Logos" style="width: 100%; max-width: 200px;">
             </div>
 
             {{-- Kanan: Text Description --}}

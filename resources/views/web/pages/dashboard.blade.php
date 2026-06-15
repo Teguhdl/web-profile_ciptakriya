@@ -65,8 +65,8 @@
         </div>
 
         <div class="cke-about__media">
-            <div class="cke-about__photo cke-about__photo--back" style="background-image: url('{{ asset($dashboard_about_image_1) }}')"></div>
-            <div class="cke-about__photo cke-about__photo--front" style="background-image: url('{{ asset($dashboard_about_image_2) }}')"></div>
+            <div id="tentang-img-1" class="cke-about__photo cke-about__photo--back" style="background-image: url('{{ asset($dashboard_about_image_1) }}')"></div>
+            <div id="tentang-img-2" class="cke-about__photo cke-about__photo--front" style="background-image: url('{{ asset($dashboard_about_image_2) }}')"></div>
             <div class="cke-about__badge">
                 <span class="cke-about__badge-num">{{ $global_stats['projects'] }}+</span>
                 <span class="cke-about__badge-lbl">Proyek dipercayakan</span>
