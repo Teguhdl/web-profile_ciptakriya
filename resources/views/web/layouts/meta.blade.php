@@ -8,7 +8,25 @@
     $ogImage      = $meta['og_image']    ?? asset($settings['system_logo'] ?? 'assets/web/logo/cke-logomark.png');
     $ogType       = $meta['og_type']     ?? 'website';
     $robots       = $meta['robots']      ?? 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1';
-    $favicon      = asset($settings['system_favicon'] ?? 'favicon.ico');
+    $faviconPath  = $settings['system_favicon'] ?? 'favicon.ico';
+    $faviconUrl   = asset($faviconPath);
+    $faviconExt   = strtolower(pathinfo($faviconPath, PATHINFO_EXTENSION));
+    
+    // Cache bust dengan filemtime agar perubahan langsung terbaca tanpa cache browser lama
+    $fullFaviconPath = str_starts_with($faviconPath, 'storage/') 
+        ? public_path(str_replace('storage/', '', $faviconPath)) 
+        : public_path($faviconPath);
+    $faviconVersion = file_exists($fullFaviconPath) ? filemtime($fullFaviconPath) : time();
+    $favicon      = $faviconUrl . '?v=' . $faviconVersion;
+    
+    $faviconMime = 'image/x-icon';
+    if ($faviconExt === 'png') {
+        $faviconMime = 'image/png';
+    } elseif ($faviconExt === 'webp') {
+        $faviconMime = 'image/webp';
+    } elseif ($faviconExt === 'svg') {
+        $faviconMime = 'image/svg+xml';
+    }
 @endphp
 
 <title>{{ $title }}</title>
@@ -57,10 +75,21 @@
 @endif
 
 {{-- Favicon Set Lengkap --}}
-<link rel="icon" type="image/x-icon" href="{{ $favicon }}">
-<link rel="shortcut icon" type="image/x-icon" href="{{ $favicon }}">
-<link rel="icon" type="image/png" sizes="32x32" href="{{ asset($settings['favicon_32'] ?? ($settings['system_favicon'] ?? 'favicon.ico')) }}">
-<link rel="icon" type="image/png" sizes="16x16" href="{{ asset($settings['favicon_16'] ?? ($settings['system_favicon'] ?? 'favicon.ico')) }}">
+<link rel="icon" type="{{ $faviconMime }}" href="{{ $favicon }}">
+<link rel="shortcut icon" type="{{ $faviconMime }}" href="{{ $favicon }}">
+@if(isset($settings['favicon_32']) || isset($settings['favicon_16']))
+    @if(isset($settings['favicon_32']))
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset($settings['favicon_32']) }}?v={{ $faviconVersion }}">
+    @endif
+    @if(isset($settings['favicon_16']))
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset($settings['favicon_16']) }}?v={{ $faviconVersion }}">
+    @endif
+@else
+    @if($faviconExt !== 'ico')
+    <link rel="icon" type="{{ $faviconMime }}" sizes="32x32" href="{{ $favicon }}">
+    <link rel="icon" type="{{ $faviconMime }}" sizes="16x16" href="{{ $favicon }}">
+    @endif
+@endif
 <link rel="apple-touch-icon" sizes="180x180" href="{{ asset($settings['favicon_apple'] ?? ($settings['system_logo'] ?? 'assets/web/logo/cke-logomark.png')) }}">
 
 {{-- Verification (akan dipakai setelah submit ke Search Console) --}}

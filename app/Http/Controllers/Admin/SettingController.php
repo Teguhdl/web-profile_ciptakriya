@@ -26,12 +26,16 @@ class SettingController extends Controller
             if ($request->hasFile($key)) {
                 $file = $request->file($key);
                 
-                // Cek apakah ini gambar untuk dikonversi ke WebP
-                if (in_array(strtolower($file->getClientOriginalExtension()), ['jpeg', 'jpg', 'png', 'webp'])) {
-                    $filename = time() . '_' . pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME) . '.webp';
-                    $this->uploadAndOptimizeToWebp($file, 'settings/' . $filename);
+                $extension = strtolower($file->getClientOriginalExtension());
+                
+                // Cek apakah ini gambar untuk dikonversi ke WebP (jangan konversi favicon agar kompatibilitas maksimal)
+                if ($key !== 'system_favicon' && in_array($extension, ['jpeg', 'jpg', 'png', 'webp'])) {
+                    $value = $this->uploadImage($file, 'settings');
+                } else {
+                    // Untuk favicon atau file non-gambar (seperti .ico, .svg)
                     $filename = time() . '_' . $file->getClientOriginalName();
                     Storage::disk('public')->put('settings/' . $filename, file_get_contents($file->getPathname()));
+                    $value = 'storage/settings/' . $filename;
                 }
                 
                 // Get old value to delete if needed
@@ -42,13 +46,24 @@ class SettingController extends Controller
                         Storage::disk('public')->delete($cleanPath);
                     }
                 }
-
-                $value = 'storage/settings/' . $filename;
                 
                 Setting::updateOrCreate(
                     ['key' => $key],
                     ['value' => $value, 'type' => 'image']
                 );
+
+                // Sinkronisasikan system_favicon langsung ke public/favicon.ico di root
+                if ($key === 'system_favicon') {
+                    try {
+                        $sourcePath = str_replace('storage/', '', $value);
+                        if (Storage::disk('public')->exists($sourcePath)) {
+                            $fileData = Storage::disk('public')->get($sourcePath);
+                            file_put_contents(public_path('favicon.ico'), $fileData);
+                        }
+                    } catch (\Throwable $e) {
+                        // Abaikan jika terjadi masalah permission
+                    }
+                }
             } else {
                 Setting::updateOrCreate(
                     ['key' => $key],
